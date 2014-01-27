@@ -6,10 +6,12 @@
     sayOut("Starting query.");
     foreach($servers as $serverIP) {
       try {
-          $Query = new MinecraftPing($serverIP, 19132)
+          $Query = new MinecraftPing($serverIP, 19132);
+          $Query->Query();
           $infoarr = $Query->GetPlayers();
           $onlinetotal += $infoarr["online"];
           $onlinemax += $infoarr["max"];
+          $Query->Close();
       } catch( MinecraftQueryException $e ) {
           //sayOut("[Debug] Server $serverIP didn't respond (".$e->getMessage());
           $failed++;
